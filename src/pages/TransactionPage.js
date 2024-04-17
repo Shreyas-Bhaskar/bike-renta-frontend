@@ -12,7 +12,7 @@ const TransactionHistoryPage = () => {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/bike_rental/get_payment_history/', {
+        const response = await axios.get('https://8mvr5l-8000.csb.app/bike_rental/get_payment_history/', {
           headers: getAuthHeader(),
         });
         setTransactions(response.data);
@@ -34,7 +34,6 @@ const TransactionHistoryPage = () => {
       <table>
         <thead>
           <tr>
-            <th>Transaction ID</th>
             <th>Cost</th>
             <th>Bike ID</th>
             <th>Start Time</th>
@@ -46,7 +45,6 @@ const TransactionHistoryPage = () => {
         <tbody>
           {transactions.map((transaction) => (
             <tr key={transaction.TransactionID}>
-              <td>{transaction.TransactionID}</td>
               <td>{transaction.Cost}</td>
               <td>{transaction.BikeID}</td>
               <td>{transaction.start_time}</td>

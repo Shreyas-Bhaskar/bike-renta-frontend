@@ -19,7 +19,7 @@ const RidePage = () => {
   const [scheduleID, setScheduleID] = useState(null);
   const [showPaymentButton, setShowPaymentButton] = useState(false);
   const [cost, setCost] = useState(0);
-
+  const [rideStatus, setRideStatus] = useState('Ride Started');
 
   useEffect(() => {
     timerRef.current = setInterval(() => {
@@ -95,7 +95,7 @@ const RidePage = () => {
         console.log(bikeId)
         console.log(sourceStationId)
         console.log(destinationStationId)
-      const response = await axios.post('http://127.0.0.1:8000/bike_rental/give_feedback/', {
+      const response = await axios.post('https://8mvr5l-8000.csb.app/bike_rental/give_feedback/', {
         bike_id : bikeId,
         feedback: feedback,
         rating:'5',
@@ -126,7 +126,7 @@ const RidePage = () => {
 
   const handleEndRide = async () => {
     try {
-      const response = await axios.post('http://127.0.0.1:8000/bike_rental/end_ride/', {
+      const response = await axios.post('https://8mvr5l-8000.csb.app/bike_rental/end_ride/', {
         bike_id: bikeId,
       }, {
         headers: getAuthHeader()
@@ -136,7 +136,9 @@ const RidePage = () => {
         setScheduleID(response.data.ScheduleID);
         clearInterval(timerRef.current); // Stop the timer
         setShowPaymentButton(true); // Show the "Make Payment" button
-        alert('Ride ended successfully');
+        setRideStatus('Ride Ended'); // Update ride status
+      alert(`Ride ended successfully. Your ride cost is ${cost}`);
+      
         // Additional logic to handle UI changes can be added here
       } else {
         alert('Failed to end the ride');
@@ -155,7 +157,7 @@ const RidePage = () => {
       };
       console.log(cost);
       console.log(paymentData['amount']);
-      const response = await axios.post('http://127.0.0.1:8000/bike_rental/make_payment/', paymentData, {
+      const response = await axios.post('https://8mvr5l-8000.csb.app/bike_rental/make_payment/', paymentData, {
         headers: getAuthHeader() // Adds Authorization header
       });
   
@@ -190,14 +192,15 @@ const RidePage = () => {
     <div className="map-and-info">
       <div id="map" style={{ height: '300px', width: '300px' }}></div>
       <div className="ride-info">
-        
-        <h2>Ride Started</h2>
-        <p>{displayTime(timer)}</p>
-        {!showPaymentButton ? (
-     <button className="end-ride-btn" onClick={handleEndRide}>End Ride</button>
-   ) : (
-     <button className="make-payment-btn" onClick={handleMakePayment}>Make Payment</button>
-   )}        <p>Please dock your bike and end the ride.</p>
+  <h2>{rideStatus}</h2>
+  {rideStatus === 'Ride Ended' && <p>Your ride cost is: {cost}</p>}
+  <p>{displayTime(timer)}</p>
+  {!showPaymentButton ? (
+    <button className="end-ride-btn" onClick={handleEndRide}>End Ride</button>
+  ) : (
+    <button className="make-payment-btn" onClick={handleMakePayment}>Make Payment</button>
+  )}
+  <p>Please dock your bike and end the ride.</p>
       <textarea
   value={feedback}
   onChange={(e) => setFeedback(e.target.value)}

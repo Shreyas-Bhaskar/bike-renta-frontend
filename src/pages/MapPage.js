@@ -27,7 +27,7 @@ const MapPage = () => {
     console.log('useEffect triggered');
     const fetchStationsAndBalance = async (userLocation) => {
       try {
-        const stationsResponse = await axios.post('http://127.0.0.1:8000/bike_rental/get_nearby_stations/', {
+        const stationsResponse = await axios.post('https://8mvr5l-8000.csb.app/bike_rental/get_nearby_stations/', {
           lat: userLocation[0],
           long: userLocation[1],
         }, {
@@ -36,7 +36,7 @@ const MapPage = () => {
         setStations(stationsResponse.data.stations);
         console.log('Stations:', stationsResponse.data.stations);
         initMap(stationsResponse.data.stations, userLocation);
-        const balanceResponse = await axios.get('http://127.0.0.1:8000/bike_rental/get_balance/', {
+        const balanceResponse = await axios.get('https://8mvr5l-8000.csb.app/bike_rental/get_balance/', {
           headers: getAuthHeader()
         });
         setBalance(balanceResponse.data.balance);
@@ -56,7 +56,7 @@ const MapPage = () => {
 
 const handleRecharge = async () => {
     try {
-      const response = await axios.post('http://127.0.0.1:8000/bike_rental/add_balance/', {
+      const response = await axios.post('https://8mvr5l-8000.csb.app/bike_rental/add_balance/', {
         amount: rechargeAmount,
       }, {
         headers: getAuthHeader()
@@ -64,7 +64,7 @@ const handleRecharge = async () => {
       if (response.status === 200) {
         alert('Balance added successfully');
         // Fetch the updated balance here
-        const balanceResponse = await axios.get('http://127.0.0.1:8000/bike_rental/get_balance/', {
+        const balanceResponse = await axios.get('https://8mvr5l-8000.csb.app/bike_rental/get_balance/', {
           headers: getAuthHeader()
         });
         setBalance(balanceResponse.data.balance);
@@ -180,7 +180,7 @@ const handleRecharge = async () => {
       setCalculatedDistance(distanceInMeters);
       console.log('Distance:', distance);
       console.log('Duration:', duration);
-      const costResponse = await axios.post('http://127.0.0.1:8000/bike_rental/get_estimated_cost/', {
+      const costResponse = await axios.post('https://8mvr5l-8000.csb.app/bike_rental/get_estimated_cost/', {
         distance: distance/1000,
         bike_id: selectedBikeId
       }, {
@@ -245,7 +245,7 @@ const handleRecharge = async () => {
 
     try {
         // Make the API call to start the ride
-        const response = await axios.post('http://127.0.0.1:8000/bike_rental/start_ride/', rideStartData, {
+        const response = await axios.post('https://8mvr5l-8000.csb.app/bike_rental/start_ride/', rideStartData, {
             headers: getAuthHeader()
         });
 
@@ -349,9 +349,7 @@ const handleRecharge = async () => {
         <label htmlFor={`bike-${bike.bikeID}`} className="radio-label">
           Bike {bike.bikeID} - Manual
         </label>
-        <button className="calculate-distance-btn" onClick={handleCalculateDistance}>
-          Calculate Distance
-        </button>
+      
       </div>
     );
   } else if (bike.range > 0 && bike.range * 1000 >= calculatedDistance) { // Electric bike with sufficient range
@@ -376,6 +374,9 @@ const handleRecharge = async () => {
   return null; // Don't display the bike if it doesn't meet the criteria
 })}
       </div>
+      <button className="calculate-distance-btn" onClick={handleCalculateDistance}>
+          Calculate Distance
+        </button>
       <button className={`calculate-distance-btn ${selectedBikeId ? 'button-selected' : ''}`} onClick={navigateToRidePage}>Book</button>    
   </div>
   </div>
