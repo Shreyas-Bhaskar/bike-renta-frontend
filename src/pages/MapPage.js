@@ -21,6 +21,8 @@ const MapPage = () => {
   const [calculatedDistance, setCalculatedDistance] = useState(0);
   const [selectedBikeId, setSelectedBikeId] = useState('');
   const [estimatedCost, setEstimatedCost] = useState(0);
+  const [searchTerm, setSearchTerm] = useState('');
+const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
 
   // Fetch stations, balance, and path
   useEffect(() => {
@@ -54,6 +56,20 @@ const MapPage = () => {
     }
   }, [mapRef]);
 
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 500); // Debounce delay is 500ms
+  
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [searchTerm]);
+
+  const filteredStations = stations.filter(station =>
+    station.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+  );
+  
 const handleRecharge = async () => {
     try {
       const response = await axios.post('https://8mvr5l-8000.csb.app/bike_rental/add_balance/', {
@@ -310,7 +326,7 @@ const goToTransactionHistory = () => {
           <label htmlFor="from">From:</label>
           <select id="from" className="form-control" value={selectedFrom} onChange={handleFromChange}>
             <option value="">Select a station</option>
-            {stations.map((station) => (
+            {filteredStations.map((station) => (
               <option key={station.StationID} value={station.StationID}>
                 {station.name}
               </option>
@@ -321,7 +337,7 @@ const goToTransactionHistory = () => {
           <label htmlFor="to">To:</label>
           <select id="to" className="form-control" value={selectedDestination} onChange={handleDestinationChange}>
             <option value="">Select a station</option>
-            {stations.map((station) => (
+            {filteredStations.map((station) => (
               <option key={station.StationID} value={station.StationID}>
                 {station.name}
               </option>
