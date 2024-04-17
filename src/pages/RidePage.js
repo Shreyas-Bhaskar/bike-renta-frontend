@@ -176,11 +176,11 @@ const RidePage = () => {
     <div className="App">
     <header>
       <nav>
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
+      <ul>
+          <li><a href="/">Logout</a></li>
+            <li><a href="https://8mvr5l-8000.csb.app/admin">Admin Login</a></li>
+            <li><a href="/transaction-history">Ride History</a></li>
+          </ul>
       </nav>
     </header>
     <section className="hero">

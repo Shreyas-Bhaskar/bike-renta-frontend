@@ -25,6 +25,7 @@ const Login = ({ history }) => {
 
       if (response.status === 200) {
         localStorage.setItem('token', data.token); // Save the token
+        console.log(data.token);
         navigate('/mappage'); // Navigate to the Map page
       } else {
         setError(data.error || 'An error occurred');

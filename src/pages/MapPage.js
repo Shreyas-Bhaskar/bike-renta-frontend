@@ -77,7 +77,7 @@ const handleRecharge = async () => {
   };
 
   // Initialize the map and add markers
-  const initMap = (stations, userLocation) => {
+  const initMap = (stations=[], userLocation) => {
     if (mapRef.current) return;
     const map = L.map('map').setView(userLocation, 13);
     mapRef.current = map;
@@ -277,7 +277,9 @@ const handleRecharge = async () => {
         alert('Error starting the ride. Please check your connection and try again.');
     }
 };
-
+const goToTransactionHistory = () => {
+  navigate('/transaction-history');
+};
   
 
   return (
@@ -286,9 +288,9 @@ const handleRecharge = async () => {
         
         <nav>
           <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
+          <li><a href="/">Logout</a></li>
+            <li><a href="https://8mvr5l-8000.csb.app/admin">Admin Login</a></li>
+            <li><a href="/transaction-history">Ride History</a></li>
           </ul>
         </nav>
       </header>

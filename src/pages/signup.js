@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SignupPage = ({ history }) => {
   const [formData, setFormData] = useState({
@@ -7,6 +8,7 @@ const SignupPage = ({ history }) => {
     password: '',
   });
   const [error, setError] = useState('');
+  const navigate = useNavigate(); // Hook for programmatic navigation
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,12 +28,13 @@ const SignupPage = ({ history }) => {
       const responseData = await response.json();
 
       if (response.ok) {
-        localStorage.setItem('token', responseData.token); // Store the token
-        history.push('/dashboard'); // Navigate to dashboard or home page
+        localStorage.setItem('token', responseData.token);
+        navigate('/login'); // Store the token
       } else {
         setError(responseData.error || 'An error occurred during signup.');
       }
     } catch (error) {
+      console.log(error);
       setError('Failed to connect to the server.');
     }
   };
