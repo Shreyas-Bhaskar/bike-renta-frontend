@@ -4,6 +4,8 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/login';
 import SignupPage from './pages/signup';
 import MapPage from './pages/MapPage';
+import RidePage from './pages/RidePage';
+import TransactionPage from './pages/TransactionPage';
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/MapPage" element={<MapPage />} />
+        <Route path="/ride" element={<RidePage/> } />
+        <Route path="/transaction-history" element={<TransactionPage />} />
       </Routes>
     </Router>
   );

@@ -1,0 +1,114 @@
+.ride-page-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  #map-container {
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px #ccc;
+  }
+  
+  .ride-info {
+    width: 40%;
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .ride-info h1 {
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .ride-info .timer {
+    font-size: 24px;
+    color: #007BFF;
+    margin-bottom: 20px;
+  }
+  
+  .end-ride-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .end-ride-btn:hover {
+    background-color: #218838;
+  }
+  .map-and-info {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+  }
+  
+  .ride-info {
+    width: 40%;
+    padding: 20px;
+    margin-left: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .end-ride-btn {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .end-ride-btn:hover {
+    background-color: #3e8e41;
+  }
+  
+  footer {
+    background-color: #fff;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  footer ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  footer li {
+    display: inline;
+    margin-right: 20px;
+  }
+  
+  footer a {
+    text-decoration: none;
+    color: #333;
+  }
+
+  .make-payment-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff; /* Example color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
