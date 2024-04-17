@@ -29,7 +29,7 @@ const SignupPage = ({ history }) => {
 
       if (response.ok) {
         localStorage.setItem('token', responseData.token);
-        navigate('/login'); // Store the token
+        navigate('/login'); 
       } else {
         setError(responseData.error || 'An error occurred during signup.');
       }

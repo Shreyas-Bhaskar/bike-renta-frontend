@@ -139,31 +139,7 @@ body {
     margin-bottom: 20px;
   }
   
-  .source-station-info .available-bikes {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-  }
-  
-  .source-station-info .available-bikes input[type="radio"] {
-    background-color: green; /* Change the background color to green */
-  color: #fff;
-  }
-  
-  .source-station-info .available-bikes label {
-    display: block;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    transition: background-color 0.2s ease-in-out;
-  }
-  
-  .source-station-info .available-bikes label:hover {
-    background-color: #ddd;
-  }
+
   
   .source-station-info .book-btn {
     background-color: #4CAF50;
@@ -220,14 +196,55 @@ body {
   }
 
   /* Hide the radio button but keep label clickable */
+/* Custom Radio Button Styles */
 .custom-radio {
-    opacity: 0;
-    position: absolute;
-  }
+  opacity: 0;
+  position: absolute;
+}
+
+.radio-label {
+  position: relative;
+  padding-left: 35px; /* Adjusted space for custom radio button */
+  cursor: pointer;
+  display: inline-block;
+  color: #333; /* Text color to match the theme */
+  line-height: 25px; /* Ensuring proper alignment */
+}
+
+.radio-label:before, .radio-label:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+}
+
+.radio-label:before {
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border: 2px solid #4CAF50; /* Border color to match button styles */
+}
+
+.radio-label:after {
+  width: 22px;
+  height: 22px;
+  background-color: #4CAF50;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.custom-radio:checked + .radio-label:after {
+  opacity: 1; /* Show the inner circle when checked */
+}
   
-  .radio-label {
-    position: relative;
-    padding-left: 25px; /* Space for fake radio button */
-    cursor: pointer;
-  }
-  
+.distance-info {
+  background-color: #f0f0f0; /* Light grey background */
+  border: 1px solid #ccc; /* Light grey border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 10px; /* Padding inside the div */
+  margin-top: 20px; /* Space above the div */
+  font-size: 16px; /* Text size */
+  color: #333; /* Dark grey text */
+}

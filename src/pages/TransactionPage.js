@@ -28,6 +28,25 @@ const TransactionHistoryPage = () => {
     navigate('/MapPage'); // Assuming '/MapPage' is the correct path to the map page
   };
 
+  const handleDelete = async (transactionId) => {
+    try {
+      const response = await axios.delete('https://8mvr5l-8000.csb.app/bike_rental/delete_transaction/', {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic2hyZXlhcyJ9.nsdHEbKuyDELvnyxSbj1ZUpwGRR4cPIBoxFv2TRH1H8'
+        },
+        data: {
+          "transaction_id": transactionId
+        }
+      });
+      if (response.status === 200) {
+        // Refresh the transactions list
+        window.location.reload();      }
+    } catch (error) {
+      console.error('Failed to delete transaction:', error);
+    }
+  };
+
   return (
     <div>
       <h2>Transaction History</h2>
@@ -40,6 +59,7 @@ const TransactionHistoryPage = () => {
             <th>End Time</th>
             <th>Start Station</th>
             <th>End Station</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -51,6 +71,9 @@ const TransactionHistoryPage = () => {
               <td>{transaction.end_time}</td>
               <td>{transaction.start_station}</td>
               <td>{transaction.end_station}</td>
+              <td>
+        <button onClick={() => handleDelete(transaction.TransactionID)}>Delete</button>
+      </td> 
             </tr>
           ))}
         </tbody>

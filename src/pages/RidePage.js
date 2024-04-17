@@ -20,6 +20,7 @@ const RidePage = () => {
   const [showPaymentButton, setShowPaymentButton] = useState(false);
   const [cost, setCost] = useState(0);
   const [rideStatus, setRideStatus] = useState('Ride Started');
+  const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
 
   useEffect(() => {
     timerRef.current = setInterval(() => {
@@ -109,6 +110,8 @@ const RidePage = () => {
       if (response.status === 200) {
         alert('Feedback submitted successfully');
         setFeedback(''); // Clear the feedback textarea
+        setFeedbackSubmitted(true); // Indicate feedback has been submitted
+
       } else {
         alert('Failed to submit feedback');
       }
@@ -207,12 +210,15 @@ const RidePage = () => {
   placeholder="Enter your feedback here"
   style={{ width: '100%', height: '100px', marginTop: '20px' }}
 />
-<button className="end-ride-btn"
-  onClick={submitFeedback}
-  style={{ marginTop: '10px' }}
->
-  Give Feedback
-</button>
+{
+  !feedbackSubmitted ? (
+    <button className="end-ride-btn" onClick={submitFeedback} style={{ marginTop: '10px' }}>
+      Give Feedback
+    </button>
+  ) : (
+    <p>Thank you for your feedback!</p>
+  )
+}
 </div>
 
     </div>

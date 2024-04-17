@@ -196,13 +196,16 @@ const handleRecharge = async () => {
         setEstimatedCost(parsedCost);
         console.log("cost is"+estimatedCost);
         if (finalDiv) {
-          finalDiv.innerHTML = `Estimated cost: ${cost}, Bike type: ${bike_type}`;
+          finalDiv.className = 'distance-info'; // Assign the new class
+
+          finalDiv.innerHTML = `Estimated cost of your Trip is : ${cost}`;
         }
       } else {
         console.error('Failed to get estimated cost');
       }
       // Create a div to display the distance and duration
       const distanceDiv = document.createElement('div');
+      distanceDiv.className = 'distance-info'; // Assign the new class
       distanceDiv.innerHTML = `Distance of trip is ${distance} meters and the duration is ${duration} seconds.`;
   
       // Display the available bikes at the source station
