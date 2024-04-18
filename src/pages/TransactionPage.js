@@ -32,7 +32,8 @@ const TransactionHistoryPage = () => {
     try {
       const response = await axios.delete('https://8mvr5l-8000.csb.app/bike_rental/delete_transaction/', {
         headers: {
-          'Content-Type': 'application/json',
+          headers: getAuthHeader()
+
         },
         data: {
           "transaction_id": transactionId
