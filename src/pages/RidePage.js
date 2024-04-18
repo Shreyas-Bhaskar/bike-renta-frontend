@@ -21,6 +21,8 @@ const RidePage = () => {
   const [cost, setCost] = useState(0);
   const [rideStatus, setRideStatus] = useState('Ride Started');
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
+  const [rideId, setRideId] = useState(null);
+
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -32,7 +34,7 @@ const RidePage = () => {
   }, []);
 
   useEffect(() => {
-    const { source, destination,bikeId,sourceStationId, destinationStationId,distance,cost } = location.state || {};
+    const { source, destination,bikeId,sourceStationId, destinationStationId,distance,cost,rideId } = location.state || {};
     if (source && destination && !mapRef.current) {
       const map = L.map('map').setView(source, 13);
       mapRef.current = map;
@@ -41,11 +43,14 @@ const RidePage = () => {
       setDestinationStationId(destinationStationId);
       setDistance(distance);
       setCost(cost);
+      setRideId(rideId);
       console.log(bikeId);
       console.log(sourceStationId);
       console.log(destinationStationId);
       console.log(distance);
       console.log(cost);
+      console.log(rideId)
+
       // Tiles
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
@@ -132,6 +137,7 @@ const RidePage = () => {
     try {
       const response = await axios.post('https://8mvr5l-8000.csb.app/bike_rental/end_ride/', {
         bike_id: bikeId,
+        ride_id: rideId
       }, {
         headers: getAuthHeader()
       });

@@ -22,7 +22,11 @@ const MapPage = () => {
   const [selectedBikeId, setSelectedBikeId] = useState('');
   const [estimatedCost, setEstimatedCost] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
-const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
+  const [calculatedDuration, setCalculatedDuration] = useState(0);
+  const [rideId, setRideId] = useState(null);
+
+
 
   // Fetch stations, balance, and path
   useEffect(() => {
@@ -104,7 +108,7 @@ const handleRecharge = async () => {
     }).addTo(map);
 
     const userMarkerIcon = L.icon({
-      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
+      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
       iconSize: [25, 41],
       iconAnchor: [12, 41],
       popupAnchor: [1, -34]
@@ -114,15 +118,23 @@ const handleRecharge = async () => {
   .addTo(map)
   .bindTooltip("My Location", { permanent: false, direction: 'top' });
 
-    const stationMarkerIcon = L.icon({
+    const greenIcon = L.icon({
+      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+    });
+    
+    const redIcon = L.icon({
       iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
       iconSize: [25, 41],
       iconAnchor: [12, 41],
-      popupAnchor: [1, -34]
+      popupAnchor: [1, -34],
     });
-
     stations.forEach((station) => {
-      const marker = L.marker([station.lat, station.lon], { icon: stationMarkerIcon }).addTo(map);
+      const markerIcon = station.available_bikes.length > 0 ? greenIcon : redIcon;
+
+      const marker = L.marker([station.lat, station.lon], { icon: markerIcon }).addTo(map);
       marker.bindPopup(`<b>${station.name}</b><br>${station.Address}`);
     });
   };
@@ -194,6 +206,7 @@ const handleRecharge = async () => {
       
       const distanceInMeters = data.features[0].properties.summary.distance; // Assuming this is the distance in meters
       setCalculatedDistance(distanceInMeters);
+      setCalculatedDuration(duration);
       console.log('Distance:', distance);
       console.log('Duration:', duration);
       const costResponse = await axios.post('https://8mvr5l-8000.csb.app/bike_rental/get_estimated_cost/', {
@@ -269,8 +282,8 @@ const handleRecharge = async () => {
         });
 
         if (response.status === 200) {
-            // Assuming pathCoordinates should include specific route details
-            const pathCoordinates = [
+          setRideId(response.data.ride_id);
+          const pathCoordinates = [
                 [selectedFromStation.lat, selectedFromStation.lon],
                 [selectedDestinationStation.lat, selectedDestinationStation.lon]
             ];
@@ -285,7 +298,8 @@ const handleRecharge = async () => {
                     sourceStationId: selectedFromStation.StationID,
                     destinationStationId: selectedDestinationStation.StationID,
                     distance: calculatedDistance/1000,
-                    cost:estimatedCost
+                    cost:estimatedCost,
+                    rideId:rideId
                 }
             });
         } else {
@@ -373,7 +387,7 @@ function handleClick() {
       
       </div>
     );
-  } else if (bike.range > 0 && bike.range * 1000 >= calculatedDistance) { // Electric bike with sufficient range
+  } else if (bike.range > 0 && bike.range * 60 >= calculatedDuration) { // Electric bike with sufficient range
     return (
       <div key={bike.bikeID}>
         <input 
