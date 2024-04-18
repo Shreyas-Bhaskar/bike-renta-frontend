@@ -248,3 +248,12 @@ body {
   font-size: 16px; /* Text size */
   color: #333; /* Dark grey text */
 }
+.button-link {
+  background: none;
+  color: blue;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+}

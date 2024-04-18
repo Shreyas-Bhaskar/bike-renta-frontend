@@ -112,3 +112,12 @@
     border-radius: 5px;
     cursor: pointer;
   }
+  .button-link {
+    background: none;
+    color: blue;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    text-decoration: underline;
+  }

@@ -175,6 +175,9 @@ const RidePage = () => {
       alert('Error making payment. Please check your connection and try again.');
     }
   };
+  function handleClick() {
+    navigate('/transactionPage'); // Use the path you want to navigate to
+  }
   return (
     <div className="App">
     <header>
@@ -182,7 +185,7 @@ const RidePage = () => {
       <ul>
           <li><a href="/">Logout</a></li>
             <li><a href="https://8mvr5l-8000.csb.app/admin">Admin Login</a></li>
-            <li><a href="/transactionPage">Ride History</a></li>
+            <li><button onClick={handleClick}>Ride History</button></li>
           </ul>
       </nav>
     </header>

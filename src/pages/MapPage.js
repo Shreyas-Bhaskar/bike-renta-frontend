@@ -309,8 +309,7 @@ const goToTransactionHistory = () => {
           <ul>
           <li><a href="/">Logout</a></li>
             <li><a href="https://8mvr5l-8000.csb.app/admin">Admin Login</a></li>
-            <li><a href="/transactionPage">Ride History</a></li>
-          </ul>
+            <button onClick={handleClick} className="button-link">Ride History</button>          </ul>
         </nav>
       </header>
       <section className="hero">
