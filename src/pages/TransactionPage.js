@@ -31,13 +31,11 @@ const TransactionHistoryPage = () => {
   const handleDelete = async (transactionId) => {
     try {
       const response = await axios.post('https://8mvr5l-8000.csb.app/bike_rental/delete_transaction/', {
-        headers: {
-          headers: getAuthHeader()
-
-        },
-        data: {
+      
           "transaction_id": transactionId
-        }
+        },{
+        headers: getAuthHeader()
+        
       });
       if (response.status === 200) {
         // Refresh the transactions list
