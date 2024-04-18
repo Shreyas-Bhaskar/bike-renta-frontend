@@ -17,7 +17,7 @@ const SignupPage = ({ history }) => {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://8mvr5l-8000.csb.app/bike_rental/signup/', {
+      const response = await fetch('https://stingray-app-eibd8.ondigitalocean.app/bike_rental/signup/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

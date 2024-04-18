@@ -13,7 +13,7 @@ const Login = ({ history }) => {
     setError(''); // Clear previous errors
 
     try {
-      const response = await fetch('https://8mvr5l-8000.csb.app/bike_rental/login/', { // Replace '/api/login' with your actual API endpoint
+      const response = await fetch('https://stingray-app-eibd8.ondigitalocean.app/bike_rental/login/', { // Replace '/api/login' with your actual API endpoint
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

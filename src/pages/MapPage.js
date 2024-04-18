@@ -33,7 +33,7 @@ const MapPage = () => {
     console.log('useEffect triggered');
     const fetchStationsAndBalance = async (userLocation) => {
       try {
-        const stationsResponse = await axios.post('https://8mvr5l-8000.csb.app/bike_rental/get_nearby_stations/', {
+        const stationsResponse = await axios.post('https://stingray-app-eibd8.ondigitalocean.app/bike_rental/get_nearby_stations/', {
           lat: userLocation[0],
           long: userLocation[1],
         }, {
@@ -42,7 +42,7 @@ const MapPage = () => {
         setStations(stationsResponse.data.stations);
         console.log('Stations:', stationsResponse.data.stations);
         initMap(stationsResponse.data.stations, userLocation);
-        const balanceResponse = await axios.get('https://8mvr5l-8000.csb.app/bike_rental/get_balance/', {
+        const balanceResponse = await axios.get('https://stingray-app-eibd8.ondigitalocean.app/bike_rental/get_balance/', {
           headers: getAuthHeader()
         });
         setBalance(balanceResponse.data.balance);
@@ -76,7 +76,7 @@ const MapPage = () => {
   
 const handleRecharge = async () => {
     try {
-      const response = await axios.post('https://8mvr5l-8000.csb.app/bike_rental/add_balance/', {
+      const response = await axios.post('https://stingray-app-eibd8.ondigitalocean.app/bike_rental/add_balance/', {
         amount: rechargeAmount,
       }, {
         headers: getAuthHeader()
@@ -84,7 +84,7 @@ const handleRecharge = async () => {
       if (response.status === 200) {
         alert('Balance added successfully');
         // Fetch the updated balance here
-        const balanceResponse = await axios.get('https://8mvr5l-8000.csb.app/bike_rental/get_balance/', {
+        const balanceResponse = await axios.get('https://stingray-app-eibd8.ondigitalocean.app/bike_rental/get_balance/', {
           headers: getAuthHeader()
         });
         setBalance(balanceResponse.data.balance);
@@ -209,7 +209,7 @@ const handleRecharge = async () => {
       setCalculatedDuration(duration);
       console.log('Distance:', distance);
       console.log('Duration:', duration);
-      const costResponse = await axios.post('https://8mvr5l-8000.csb.app/bike_rental/get_estimated_cost/', {
+      const costResponse = await axios.post('https://stingray-app-eibd8.ondigitalocean.app/bike_rental/get_estimated_cost/', {
         distance: distance/1000,
         bike_id: selectedBikeId
       }, {
@@ -277,7 +277,7 @@ const handleRecharge = async () => {
 
     try {
         // Make the API call to start the ride
-        const response = await axios.post('https://8mvr5l-8000.csb.app/bike_rental/start_ride/', rideStartData, {
+        const response = await axios.post('https://stingray-app-eibd8.ondigitalocean.app/bike_rental/start_ride/', rideStartData, {
             headers: getAuthHeader()
         });
 
@@ -408,31 +408,37 @@ function handleClick() {
   return null; // Don't display the bike if it doesn't meet the criteria
 })}
       </div>
-      <button className="calculate-distance-btn" onClick={handleCalculateDistance}>
-          Calculate Distance
-        </button>
-      <button className={`calculate-distance-btn ${selectedBikeId ? 'button-selected' : ''}`} onClick={navigateToRidePage}>Book</button>    
-  </div>
+<div className="buttons-container">
+<br />
+
+  <button className="calculate-distance-btn" onClick={handleCalculateDistance}>
+    Estimate
+  </button>
+  <br />
+  <button className={`calculate-distance-btn ${selectedBikeId ? 'button-selected' : ''}`} onClick={navigateToRidePage}>Book</button>
+</div></div>
   </div>
 )}
       {balance !== null && (
-        <div className="balance">
-          <p>Balance: {balance} points</p>
-          <button className="recharge-btn" onClick={() => setShowRechargeInput(true)}>Recharge</button>
-          {showRechargeInput && (
-            <div>
-              <input
-                type="number"
-                value={rechargeAmount}
-                onChange={(e) => setRechargeAmount(e.target.value)}
-                placeholder="Enter amount"
-              />
-              <button className="recharge-btn" onClick={handleRecharge}>Add Balance</button>
-            </div>
-          )}
-        </div>
-        
-      )}
+  <div className="balance">
+    <p>Balance: {balance} points</p>
+    <button className="recharge-btn" onClick={() => setShowRechargeInput(true)}>Recharge</button>
+    <br/>
+    <br/>
+    {showRechargeInput && (
+      <div>
+        <input
+          type="number"
+          value={rechargeAmount}
+          onChange={(e) => setRechargeAmount(e.target.value)}
+          placeholder="Enter amount"
+          className="recharge-input" // Add a class for styling
+        />
+        <button className="recharge-btn" onClick={handleRecharge}>Add Balance</button>
+      </div>
+    )}
+  </div>
+)}
       <footer>
         <p>Copyright © 2023 Bike Booking Inc. All rights reserved.</p>
         <ul>

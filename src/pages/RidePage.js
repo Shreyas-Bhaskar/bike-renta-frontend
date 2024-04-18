@@ -102,7 +102,7 @@ const RidePage = () => {
         console.log(bikeId)
         console.log(sourceStationId)
         console.log(destinationStationId)
-      const response = await axios.post('https://8mvr5l-8000.csb.app/bike_rental/give_feedback/', {
+      const response = await axios.post('https://stingray-app-eibd8.ondigitalocean.app/bike_rental/give_feedback/', {
         bike_id : bikeId,
         feedback: feedback,
         rating:'5',
@@ -135,7 +135,7 @@ const RidePage = () => {
 
   const handleEndRide = async () => {
     try {
-      const response = await axios.post('https://8mvr5l-8000.csb.app/bike_rental/end_ride/', {
+      const response = await axios.post('https://stingray-app-eibd8.ondigitalocean.app/bike_rental/end_ride/', {
         bike_id: bikeId,
         ride_id: rideId
       }, {
@@ -162,12 +162,12 @@ const RidePage = () => {
     try {
       // Assuming `amount` and `scheduleID` are state variables that hold the cost and the schedule ID respectively
       const paymentData = {
-        ScheduleID: scheduleID,
+        ScheduleID: rideId,
         amount: cost, // Ensure this variable holds the cost of the ride
       };
-      console.log(cost);
+      console.log(rideId);
       console.log(paymentData['amount']);
-      const response = await axios.post('https://8mvr5l-8000.csb.app/bike_rental/make_payment/', paymentData, {
+      const response = await axios.post('https://stingray-app-eibd8.ondigitalocean.app/bike_rental/make_payment/', paymentData, {
         headers: getAuthHeader() // Adds Authorization header
       });
   

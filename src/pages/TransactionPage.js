@@ -12,7 +12,7 @@ const TransactionHistoryPage = () => {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await axios.get('https://8mvr5l-8000.csb.app/bike_rental/get_payment_history/', {
+        const response = await axios.get('https://stingray-app-eibd8.ondigitalocean.app/bike_rental/get_payment_history/', {
           headers: getAuthHeader(),
         });
         setTransactions(response.data);
@@ -30,7 +30,7 @@ const TransactionHistoryPage = () => {
 
   const handleDelete = async (transactionId) => {
     try {
-      const response = await axios.post('https://8mvr5l-8000.csb.app/bike_rental/delete_transaction/', {
+      const response = await axios.post('https://stingray-app-eibd8.ondigitalocean.app/bike_rental/delete_transaction/', {
       
           "transaction_id": transactionId
         },{
@@ -39,7 +39,8 @@ const TransactionHistoryPage = () => {
       });
       if (response.status === 200) {
         // Refresh the transactions list
-        window.location.reload();      }
+        setTransactions(transactions.filter(transaction => transaction.TransactionID !== transactionId));
+      }
     } catch (error) {
       console.error('Failed to delete transaction:', error);
     }
