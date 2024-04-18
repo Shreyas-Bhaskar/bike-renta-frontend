@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 import './RidePage.css'
 import { getAuthHeader } from '../api/utils';
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
 const RidePage = () => {
   const location = useLocation();
   const mapRef = useRef(null);
@@ -21,6 +21,7 @@ const RidePage = () => {
   const [cost, setCost] = useState(0);
   const [rideStatus, setRideStatus] = useState('Ride Started');
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
+  let navigate = useNavigate();
 
   useEffect(() => {
     timerRef.current = setInterval(() => {

@@ -296,10 +296,11 @@ const handleRecharge = async () => {
         alert('Error starting the ride. Please check your connection and try again.');
     }
 };
-const goToTransactionHistory = () => {
-  navigate('/transaction-history');
-};
-  
+
+function handleClick() {
+  navigate('/transactionPage'); // Use the path you want to navigate to
+}
+
 
   return (
     <div className="App">
