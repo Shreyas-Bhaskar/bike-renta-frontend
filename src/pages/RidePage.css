@@ -7,9 +7,12 @@
   }
   
   #map-container {
-    padding: 10px;
+    padding: 20px;
     border: 1px solid #ccc;
     box-shadow: 0 0 10px #ccc;
+    justify-content: space-around;
+    width: 100%; /* Adjust the width as needed */
+    height: 900px; /* Adjust the height as needed */
   }
   
   .ride-info {
@@ -112,6 +115,34 @@
     border-radius: 5px;
     cursor: pointer;
   }
+  .button-link {
+    background: none;
+    color: blue;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  
+  .hero {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    height: 500px;
+    background-image: url('https://images.squarespace-cdn.com/content/v1/63aa722d8498ea16752e56a8/fa6a5924-36cc-4ab5-b213-4beb512b45e6/IMG_0918.JPG');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+
+  }
+  .hero-content {
+    max-width: 600px;
+    margin-left: 20px;
+  }
+
   .button-link {
     background: none;
     color: blue;

@@ -63,7 +63,7 @@ const MapPage = () => {
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedSearchTerm(searchTerm);
-    }, 500); // Debounce delay is 500ms
+    }, 1000); // Debounce delay is 500ms
   
     return () => {
       clearTimeout(handler);
@@ -328,8 +328,8 @@ function handleClick() {
       </header>
       <section className="hero">
         <div className="hero-content">
-          <h1>Welcome to our bike booking website!</h1>
-          <p>Book your bike now and enjoy the ride.</p>
+          <h1>Book your Blue now!</h1>
+          <p>Ride Blue Feel New.</p>
         </div>
         
       </section>
@@ -400,7 +400,7 @@ function handleClick() {
 
         />
         <label htmlFor={`bike-${bike.bikeID}`} className="radio-label">
-          Bike {bike.bikeID} - Electric ({bike.range} km)
+          Bike {bike.bikeID} - Electric ({bike.range/2} km)
         </label>
       </div>
     );

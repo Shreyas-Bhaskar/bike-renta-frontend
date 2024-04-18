@@ -203,10 +203,10 @@ const RidePage = () => {
       </div>
     </section>
     <div className="map-and-info">
-      <div id="map" style={{ height: '300px', width: '300px' }}></div>
+      <div id="map" style={{ height: '400px', width: '500px' }}></div>
       <div className="ride-info">
   <h2>{rideStatus}</h2>
-  {rideStatus === 'Ride Ended' && <p>Your ride cost is: {cost}</p>}
+  {rideStatus === 'Ride Ended' && <p>Your ride cost is: {cost} points</p>}
   <p>{displayTime(timer)}</p>
   {!showPaymentButton ? (
     <button className="end-ride-btn" onClick={handleEndRide}>End Ride</button>
