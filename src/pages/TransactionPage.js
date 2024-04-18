@@ -49,7 +49,7 @@ const TransactionHistoryPage = () => {
 
   return (
     <div>
-      <h2>Transaction History</h2>
+      <h2>Ride History</h2>
       <table>
         <thead>
           <tr>
