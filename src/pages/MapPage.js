@@ -24,7 +24,7 @@ const MapPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
   const [calculatedDuration, setCalculatedDuration] = useState(0);
-  const [rideId, setRideId] = useState(null);
+  const [rideId, setRideId] = useState(0);
 
 
 
@@ -282,7 +282,7 @@ const handleRecharge = async () => {
         });
 
         if (response.status === 200) {
-          setRideId(response.data.ride_id);
+          setRideId(response.data.RideID);
           const pathCoordinates = [
                 [selectedFromStation.lat, selectedFromStation.lon],
                 [selectedDestinationStation.lat, selectedDestinationStation.lon]
@@ -293,13 +293,12 @@ const handleRecharge = async () => {
                 state: {
                     source: [selectedFromStation.lat, selectedFromStation.lon],
                     destination: [selectedDestinationStation.lat, selectedDestinationStation.lon],
-                    path: pathCoordinates,
                     bikeId: selectedBikeId,
                     sourceStationId: selectedFromStation.StationID,
                     destinationStationId: selectedDestinationStation.StationID,
                     distance: calculatedDistance/1000,
                     cost:estimatedCost,
-                    rideId:rideId
+                    rideId:response.data.RideID
                 }
             });
         } else {

@@ -21,7 +21,7 @@ const RidePage = () => {
   const [cost, setCost] = useState(0);
   const [rideStatus, setRideStatus] = useState('Ride Started');
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
-  const [rideId, setRideId] = useState(null);
+  const [rideId, setRideId] = useState(0);
 
   let navigate = useNavigate();
 

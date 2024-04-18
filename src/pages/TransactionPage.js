@@ -30,7 +30,7 @@ const TransactionHistoryPage = () => {
 
   const handleDelete = async (transactionId) => {
     try {
-      const response = await axios.delete('https://8mvr5l-8000.csb.app/bike_rental/delete_transaction/', {
+      const response = await axios.post('https://8mvr5l-8000.csb.app/bike_rental/delete_transaction/', {
         headers: {
           headers: getAuthHeader()
 
